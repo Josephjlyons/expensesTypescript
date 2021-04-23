@@ -29,6 +29,13 @@ const App = () => {
     },
   ];
 
+  const addExpenseHandler = (expense: any) => {
+    console.log('in app.tsx');
+    console.log(expense)
+
+
+  }
+
   // return React.createElement(
   //   'div',
   //   {},
@@ -37,10 +44,12 @@ const App = () => {
   //   )
   
   //code above and below are the same
-  
+
+// this creates connection between components through this file 
+
     return (
     <div>
-     <NewExpense />
+     <NewExpense onAddExpense={addExpenseHandler}/>             
      <Expenses items={expenses}/>
 
     </div>
