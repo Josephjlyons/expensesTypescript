@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import './ExpenseForm.css'
 
-const ExpenseForm = (): JSX.Element => {
+const ExpenseForm = (props: any): JSX.Element => {
     const [enteredTitle, setEnteredTitle] = useState('')
     const [enteredAmount, setEnteredAmount] = useState('')          //Commented out code is doing the same as below but just inside one state
     const [enteredDate, setEnteredDate] = useState('')
@@ -53,10 +53,10 @@ const ExpenseForm = (): JSX.Element => {
         const expenseData = {
             title: enteredTitle,
             amount: enteredAmount,
-            date: new Date (enteredDate)
+            date: new Date(enteredDate)
         }
 
-        console.log(expenseData)
+        props.onSaveExpenseData(expenseData)
         setEnteredTitle('')
         setEnteredAmount('')
         setEnteredDate('')
@@ -82,7 +82,7 @@ const ExpenseForm = (): JSX.Element => {
                     <label>Date</label>
                     <input
                         type='date'
-                        min='2021-04-15'
+                        min='2020-04-15'
                         max='2022-12-31'
                         value={enteredDate}
                         onChange={dateHandler} />
