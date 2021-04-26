@@ -4,39 +4,47 @@ import ExpenseFilter from './ExpenseFilter'
 import ExpenseItem from './ExpenseItem'
 
 
-const Expenses = (props: { items: { title: string; amount: number; date: any; }[]; }) => {
-  
+const Expenses = (props: { items: { id: any; title: string; amount: number; date: any; }[]; }): JSX.Element => {
+
   const [filteredYear, setFiltedYear] = useState('2021')
-  
+
   const filterChangeHandler = (SelectedYear: any) => {
     setFiltedYear(SelectedYear)
 
   }
+
+  const filteredExpenses = props.items.filter(expense => {
+    return expense.date.getFullYear().toString() === filteredYear;
+
+  })
+
+  
   return (
     <div>
 
       <Card>
-        <ExpenseFilter selected={filteredYear} onFilterYear={filterChangeHandler} />
-        <ExpenseItem
-          title={props.items[0].title}
-          amount={props.items[0].amount}
-          date={props.items[0].date}
+        <ExpenseFilter
+          selected={filteredYear}
+          onFilterYear={filterChangeHandler}
         />
-        <ExpenseItem
-          title={props.items[1].title}
-          amount={props.items[1].amount}
-          date={props.items[1].date}
-        />
-        <ExpenseItem
-          title={props.items[2].title}
-          amount={props.items[2].amount}
-          date={props.items[2].date}
-        />
-        <ExpenseItem
-          title={props.items[3].title}
-          amount={props.items[3].amount}
-          date={props.items[3].date}
-        />
+        {filteredExpenses.length === 0 && <p>No Expenses Found!</p>}
+        {filteredExpenses.length > 0 &&
+          (filteredExpenses.map((expense: {
+            id: React.Key;
+            title: string;
+            amount: number;
+            date: { toLocaleString: (arg0: string, arg1: { month?: string; day?: string }) => any; getFullYear: () => any; };
+          }):
+            JSX.Element => (
+
+            <ExpenseItem
+              key={expense.id}
+              title={expense.title}
+              amount={expense.amount}
+              date={expense.date}
+            />)))}
+
+
       </Card>
     </div>
   )

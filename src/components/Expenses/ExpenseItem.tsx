@@ -7,8 +7,8 @@ import Card from '../UI/Card'
 
 const ExpenseItem = (props:
     {
-        date: { toLocaleString: (arg0: string, arg1: { month?: string; day?: string }) => any; getFullYear: () => any; };
         title: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined;
+        date: { toLocaleString: (arg0: string, arg1: { month?: string; day?: string }) => any; getFullYear: () => any; };
         amount: string | number | boolean;
     }):
 
